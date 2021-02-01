@@ -1,78 +1,73 @@
-[![license][licenca-badge]][LICENSE]
+### Presentation
 
-### Apresentação
+This modification was developed in the OCMOD format, and transforms all of your store's standard URLs into friendly URLs.
 
-Esta modificação foi desenvolvida no formato OCMOD, e transforma todas as URLs padrões de sua loja em URLs amigáveis.
+One of the great advantages of this modification is that friendly URLs collaborate directly with SEO, and are visually better.
 
-Uma das grandes vantagens desta modificação é que as URLs amigáveis colaboram diretamente no SEO, e são visualmente melhores.
+### Installation
 
-### Instalação
+ 1. Access the link: https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=22038.
+ 2. Find the most current version and compatible with your version of OpenCart and download it.
+ 3. In the store administration, access the menu Extensions → Installer (Extensions → Installer).
+ 4. On the installer page, click the Upload button and select the file 'todos-urls-amigaveis.ocmod.zip' (which you downloaded from this repository), and wait for the automatic installation to complete.
+ 5. After installation, access the Extensions → Modifications menu and click on the Refresh button, so that the installed modification is incremented in the store, remembering that it is not the "Update" button of the browser, but yes the "Update" button in blue color next to the orange and red button on the OpenCart screen.
 
- 1. Acesse o link: https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=22038.
- 2. Localize a versão mais atual e compatível com sua versão do OpenCart e faça o download.
- 3. Na administração da loja acesse o menu Extensões→Instalador (Extensions→Installer).
- 4. Na página do instalador, clique no botão Upload e selecione o arquivo 'todas-urls-amigaveis.ocmod.zip' (que você baixou deste repositório), e aguarde a conclusão da instalação automática.
- 5. Após a instalação, acesse o menu Extensões→Modificações (Extensions→Modifications) e clique no botão Refresh (Atualizar), para que a modificação instalada seja incrementada na loja, lembrando que não é o botão "Atualizar" do navegador, e sim o botão "Atualizar" na cor azul ao lado do botão laranja e vermelho na tela do próprio OpenCart.
+### Configuration
 
-### Configuração
-
-Após a instalação nenhuma configuração é necessária.
+After installation, no configuration is required.
  
-#### Corrigindo erro no carrinho e na busca
+#### Correcting error in cart and search
 
-Assumindo que seu tema utiliza a mesma base do tema padrão do OpenCart, você precisa fazer uma modificação no arquivo catalog/view/javascript/common.js
+Assuming that your theme uses the same base as the standard OpenCart theme, you need to make a modification to the catalog / view / javascript / common.js file
 
-No arquivo common.js, localize as linhas de código abaixo:
+In the common.js file, locate the lines of code below:
 
-```js
-if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
- location = 'index.php?route=checkout/cart';
+`` js
+if (getURLVar ('route') == 'checkout / cart' || getURLVar ('route') == 'checkout / checkout') {
+ location = 'index.php? route = checkout / cart';
 } else {
- $('#cart > ul').load('index.php?route=common/cart/info ul li');
+ $ ('# cart> ul'). load ('index.php? route = common / cart / info ul li');
 }
-```
+``
 
-E substitua todas as ocorrências delas pelas linhas de código abaixo:
+And replace all occurrences of them with the lines of code below:
 
-```js
-var getURlRewrite = $(location).attr('href').split('/').pop();
+`` js
+var getURlRewrite = $ (location) .attr ('href'). split ('/'). pop ();
 
-if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
- location = 'index.php?route=checkout/cart';
-} else if (getURlRewrite == 'carrinho' || getURlRewrite == 'finalizar') {
- location = 'carrinho';
+if (getURLVar ('route') == 'checkout / cart' || getURLVar ('route') == 'checkout / checkout') {
+ location = 'index.php? route = checkout / cart';
+} else if (getURlRewrite == 'cart' || getURlRewrite == 'finalize') {
+ location = 'cart';
 } else {
- $('#cart > ul').load('index.php?route=common/cart/info ul li');
+ $ ('# cart> ul'). load ('index.php? route = common / cart / info ul li');
 }
-```
+``
 
-Localize a linha de código abaixo:
+Locate the line of code below:
 
-```js
-url = $('base').attr('href') + 'index.php?route=product/search';
-```
+`` js
+url = $ ('base'). attr ('href') + 'index.php? route = product / search';
+``
 
-E substitua todas as ocorrências dela pela linha de código abaixo:
+And replace all occurrences of it with the line of code below:
 
-```js
-url = $('base').attr('href') + 'busca';
-```
+`` js
+url = $ ('base'). attr ('href') + 'search';
+``
 
-Salve as alterações no arquivo e limpe o cache do seu navegador para remover a versão em cache do arquivo common.js.
+Save changes to the file and clear your browser's cache to remove the cached version of the common.js file.
 
-### Desinstalação
+### Uninstallation
 
-Para desinstalar a modificação, na administração da loja, acesse o menu Extensões→Modificações (Extensions→Modifications) e selecione a modificação com o nome 'Todas as URLs amigáveis', depois clique no botão Excluir (Delete), e no botão Atualizar (Refresh).
+To uninstall the modification, in the store administration, go to Extensions → Modifications menu and select the modification with the name 'All friendly URLs', then click the Delete button and the Refresh button ).
 
-### Atualização
+### Update
 
-Acesse a administração da loja e execute o procedimento de Desinstalação, depois execute o procedimento de Instalação.
+Access the store administration and perform the Uninstall procedure, then perform the Installation procedure.
 
-### Dúvidas
+### Doubts
 
-O OCMOD (OpenCart Modification) é nativo do OpenCart, ou seja, não é necessário instalar nenhum complemento no OpenCart para utilizar modificações ou extensões no formato OCMOD, para mais informações sobre o OCMOD, segue o link para mais informações:
+OCMOD (OpenCart Modification) is native to OpenCart, that is, it is not necessary to install any add-on in OpenCart to use modifications or extensions in the OCMOD format, for more information about OCMOD, follow the link for more information:
 
 https://github.com/opencart/opencart/wiki/Modification-System
-
-[licenca-badge]: https://img.shields.io/badge/licença-GPLv3-blue.svg
-[LICENSE]: ./LICENSE
